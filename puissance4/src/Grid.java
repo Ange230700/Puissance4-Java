@@ -15,12 +15,14 @@ public class Grid{
     }
     //display grid with spaces for empty cells and # for contour, the upper part of the grid is empty
     public void DisplayGrid(){
-        for(int i = 0; i < this.height + 1; i++){
+        for(int i = 0; i < this.height + 2; i++){
             for(int j = 0; j < this.width +2; j++){
-                if(  i == this.height || j==0  || j == this.width +1 ){
+                if(  i == this.height || j==0 && i != this.height + 1|| j == this.width +1 && i != this.height + 1){
                     System.out.print("#");
-                }
-                else{
+                }else if (i == this.height + 1 && j!=0 && j!=this.width +1){
+                    //print alphabet letters for the bottom of the grid to indicate the columns
+                    System.out.print((char)(j+64));
+                }else{
                     System.out.print(" ");
                 }
             }
