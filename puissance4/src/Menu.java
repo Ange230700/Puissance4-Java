@@ -11,6 +11,7 @@ public class Menu {
             System.out.println("Please enter 2 or 3");
             nbPlayers = sc.nextInt();
         }
+        sc.close();
         return nbPlayers;
     }
 }
