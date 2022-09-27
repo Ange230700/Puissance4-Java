@@ -3,7 +3,7 @@ public class Grid{
     int width;
     int height;
     // for 2 players 8x6 grid, for 3 players 12x10 grid
-    public void Grid(int nbPlayers){
+    public Grid(int nbPlayers){
         if(nbPlayers == 2){
             this.width = 8;
             this.height = 6;
