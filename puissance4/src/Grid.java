@@ -32,6 +32,15 @@ public class Grid{
             }
         }
     }
+    public void PutPiece(String piece, int column){
+        for(int i=height-1; i>=0; i--){
+                if(grid[i][column] == " "){
+                    grid[i][column] = piece;
+                    break;
+                }
+        }
+    }
+
     public void DisplayGrid (){
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[i].length; j++){
@@ -39,17 +48,5 @@ public class Grid{
             }
             System.out.println();
         }
-    }
-    public int getHeight(int x) {
-        int y = height-1;
-        while (grid[x][y] != " ") {
-            y--;
-            System.out.println("oui");
-        }
-        return y;
-    }
-
-    public void replaceEmptyByInput(int x, String input){
-        grid[getHeight(x)][x] = input;
     }
 }
