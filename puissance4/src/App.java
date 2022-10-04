@@ -13,6 +13,8 @@ public class App {
         Grid.DisplayGrid(Grid.grid);
         Grid.PutPiece("X", 1);
         Grid.DisplayGrid(Grid.grid);
+        Players.choosePiece();
+        System.out.println("Players.piece = " + Players.piece);
     }
 
 }
