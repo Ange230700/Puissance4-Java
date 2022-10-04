@@ -3,8 +3,12 @@ public class App {
         int nbPlayers = Menu.chooseNbPlayers();
         System.out.println("nbPlayers = " + nbPlayers);        
         Grid grid = new Grid();
-        grid.Grid(nbPlayers);
-        grid.DisplayGrid();
+        grid.grid(nbPlayers);
+        grid.BuildGrid();
+        Grid.DisplayGrid(Grid.grid);
+        grid.replaceEmptyByInput(2, "X");
+        grid.replaceEmptyByInput(2, "O");
+        Grid.DisplayGrid(Grid.grid);
     }
 
 }

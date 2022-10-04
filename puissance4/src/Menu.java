@@ -14,4 +14,5 @@ public class Menu {
         sc.close();
         return nbPlayers;
     }
+    
 }
