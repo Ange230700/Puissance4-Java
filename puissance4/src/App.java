@@ -4,12 +4,15 @@ public class App {
         System.out.println("nbPlayers = " + nbPlayers);        
         Grid grid = new Grid();
         grid.grid(nbPlayers);
-        System.out.println("grid.width = " + grid.width);
-        System.out.println("grid.height = " + grid.height);
-        grid.BuildGrid();
-        Grid.DisplayGrid(grid.grid);
-        Grid.MetO(1, 1);
-        Grid.DisplayGrid(grid.grid);
+        System.out.println("grid.width = " + Grid.width);
+        System.out.println("grid.height = " + Grid.height);
+        Grid.BuildGrid();
+        Grid.DisplayGrid(Grid.grid);
+        // Grid.MetO(1, 1);
+        Grid.PutPiece("O",1);
+        Grid.DisplayGrid(Grid.grid);
+        Grid.PutPiece("X", 1);
+        Grid.DisplayGrid(Grid.grid);
     }
 
 }

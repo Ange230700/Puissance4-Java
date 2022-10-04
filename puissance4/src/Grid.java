@@ -35,7 +35,15 @@ public class Grid{
     public static void MetO(int x, int y){
         grid[y][x] = "O";
     }
-    
+    public static void PutPiece(String piece, int column){
+        for(int i=height-1; i>=0; i--){
+                if(grid[i][column] == " "){
+                    grid[i][column] = piece;
+                    break;
+                }
+        }
+    }
+
     public static void DisplayGrid (String [][]grid){
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[i].length; j++){
