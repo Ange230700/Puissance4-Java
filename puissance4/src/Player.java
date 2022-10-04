@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Player {
 
@@ -17,17 +15,17 @@ public class Player {
         }
     }
 
-    public char getColumn() {
+    public char getColumn(int width) {
         System.out.println("Which column do you want to choose ?");
         System.out.println(">");
-        InputStreamReader bis = new InputStreamReader(System.in);
-        BufferedReader br = new BufferedReader(bis);
-        try {
-            return br.readLine().charAt(0);
+        Scanner input = new Scanner(System.in);
+        input.close();
+        if(input.nextLine().length() == 1 || input.nextLine().charAt(0) > (char)(width+64)) {
+            return input.nextLine().charAt(0);
+        } else {
+            System.out.println("Please enter a valid column name");
+            getColumn(width);
         }
-        catch(IOException e) {
-            System.err.println("Please retry : ");
-            return getColumn();
-        }
+        return 'a';
     }
 }
