@@ -1,8 +1,8 @@
 import java.lang.String;
 public class Grid{
-    public static int width;
-    public static int height;
-    public static String[][] grid;
+    public int width;
+    public int height;
+    public String[][] grid;
     // for 2 players 8x6 grid, for 3 players 12x10 grid
     public void grid(int nbPlayers){
         if(nbPlayers == 2){
@@ -18,7 +18,7 @@ public class Grid{
     }
 
      //build the grid
-     public static void BuildGrid(){
+     public void BuildGrid(){
         for (int i=0; i<height+2;i++){
             for (int j=0; j<width+2;j++){
                 if(  i == height || j==0 && i != height + 1|| j == width +1 && i != height + 1){
@@ -32,10 +32,7 @@ public class Grid{
             }
         }
     }
-    public static void MetO(int x, int y){
-        grid[y][x] = "O";
-    }
-    public static void PutPiece(String piece, int column){
+    public void PutPiece(String piece, int column){
         for(int i=height-1; i>=0; i--){
                 if(grid[i][column] == " "){
                     grid[i][column] = piece;
@@ -44,7 +41,7 @@ public class Grid{
         }
     }
 
-    public static void DisplayGrid (String [][]grid){
+    public void DisplayGrid (){
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[i].length; j++){
                 System.out.print(grid[i][j]);
