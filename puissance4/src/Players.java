@@ -5,10 +5,10 @@ public class Players {
         Scanner sc = new Scanner(System.in);
         if (nbPlayers == 2) {
             System.out.println("Player 1, choose your piece (X or O)");
-            Menu.piece1 = sc.nextLine();
+            Menu.piece1 = sc.nextLine().toUpperCase();
             while (!Menu.piece1.equals("X") && !Menu.piece1.equals("O")) {
                 System.out.println("Please enter X or O");
-                Menu.piece1 = sc.nextLine();
+                Menu.piece1 = sc.nextLine().toUpperCase();
             }
             if (Menu.piece1.equals("X")) {
                 Menu.piece2 = "O";
@@ -20,17 +20,17 @@ public class Players {
 
         } else if (nbPlayers == 3) {
             System.out.println("Player 1, choose your piece (X, O or V)");
-            Menu.piece1 = sc.nextLine();
+            Menu.piece1 = sc.nextLine().toUpperCase();
             while (!Menu.piece1.equals("X") && !Menu.piece1.equals("O") && !Menu.piece1.equals("V")) {
                 System.out.println("Please enter X, O or V");
-                Menu.piece1 = sc.nextLine();
+                Menu.piece1 = sc.nextLine().toUpperCase();
             }
             System.out.println("Player 2, choose your piece (X, O or V)");
-            
-            Menu.piece2 = sc.nextLine();
+
+            Menu.piece2 = sc.nextLine().toUpperCase();
             while (!Menu.piece2.equals("X") && !Menu.piece2.equals("O") && !Menu.piece2.equals("V")) {
                 System.out.println("Please enter X, O or V");
-                Menu.piece2 = sc.nextLine();
+                Menu.piece2 = sc.nextLine().toUpperCase();
             }
             if (Menu.piece1.equals("X") && Menu.piece2.equals("O")) {
                 Menu.piece3 = "V";

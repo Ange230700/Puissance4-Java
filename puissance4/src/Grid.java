@@ -41,21 +41,6 @@ public class Grid{
         }
         DisplayGrid();
     }
-    // public static void CheckGrid(){
-    //     //check if the grid is full
-    //     int counter = 0;
-    //     for (int i=0; i<height;i++){
-    //         for (int j=1; j<width+1;j++){
-    //             if(grid[i][j] != " "){
-    //                 counter++;
-    //             }
-    //         }
-    //     }
-    //     if(counter == width*height){
-    //         System.out.println("The grid is full");
-    //         Menu.gameOver = true;
-    //     }
-    // }
     public static void DisplayGrid (){
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[i].length; j++){

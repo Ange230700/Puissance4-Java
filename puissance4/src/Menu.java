@@ -21,11 +21,6 @@ public class Menu {
     }
     public static void play(){
         while(!gameOver){
-            // GameManager.CheckDiagonals();
-            // GameManager.CheckDiagonals2();
-            // GameManager.CheckLigns();
-            // GameManager.CheckColumns();
-            // GameManager.CheckGrid();
             GameManager.CheckWin();
             if (gameOver){
                 break;
