@@ -15,11 +15,10 @@ public class Player {
         }
     }
 
-    public char getColumn(int width) {
+    public static char getColumn(int width) {
         System.out.println("Which column do you want to choose ?");
         System.out.println(">");
         Scanner input = new Scanner(System.in);
-        input.close();
         if(input.nextLine().length() == 1 || input.nextLine().charAt(0) > (char)(width+64)) {
             return input.nextLine().charAt(0);
         } else {

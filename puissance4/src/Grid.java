@@ -1,8 +1,8 @@
 import java.lang.String;
 public class Grid{
-    public int width;
-    public int height;
-    public String[][] grid;
+    public static int width;
+    public static int height;
+    public static String[][] grid;
     // for 2 players 8x6 grid, for 3 players 12x10 grid
     public void grid(int nbPlayers){
         if(nbPlayers == 2){
@@ -18,7 +18,7 @@ public class Grid{
     }
 
      //build the grid
-     public void BuildGrid(){
+     public static void BuildGrid(){
         for (int i=0; i<height+2;i++){
             for (int j=0; j<width+2;j++){
                 if(  i == height || j==0 && i != height + 1|| j == width +1 && i != height + 1){
@@ -32,16 +32,31 @@ public class Grid{
             }
         }
     }
-    public void PutPiece(String piece, int column){
+    public static void PutPiece(String piece, int column){
         for(int i=height-1; i>=0; i--){
                 if(grid[i][column] == " "){
                     grid[i][column] = piece;
                     break;
                 }
         }
+        DisplayGrid();
     }
-
-    public void DisplayGrid (){
+    // public static void CheckGrid(){
+    //     //check if the grid is full
+    //     int counter = 0;
+    //     for (int i=0; i<height;i++){
+    //         for (int j=1; j<width+1;j++){
+    //             if(grid[i][j] != " "){
+    //                 counter++;
+    //             }
+    //         }
+    //     }
+    //     if(counter == width*height){
+    //         System.out.println("The grid is full");
+    //         Menu.gameOver = true;
+    //     }
+    // }
+    public static void DisplayGrid (){
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[i].length; j++){
                 System.out.print(grid[i][j]);
