@@ -39,12 +39,16 @@ public class Menu {
                 if (nbPlayers == 2){
                     WhoPlays(nbPlayers, turnCounter);
                     System.out.println("Please select a column between A and H");
+                    columnStr = sc.nextLine();
+                    column = StringToInt(columnStr);
                 } else if (nbPlayers == 3){
                     WhoPlays(nbPlayers, turnCounter);
                     System.out.println("Please select a column between A and L" );
+                    columnStr = sc.nextLine();
+                    column = StringToInt(columnStr);
                 }
-                columnStr = sc.nextLine();
-                column = StringToInt(columnStr);
+                // columnStr = sc.nextLine();
+                // column = StringToInt(columnStr);
             }
             if (nbPlayers == 2){
                 if (turnCounter % 2 == 0){
@@ -71,6 +75,9 @@ public class Menu {
     public static int StringToInt(String str) {
 
         String result = "";
+        if (str == null || str.isEmpty()) {
+            return 0;
+        }
 
         for (int i = 0; i < str.length(); i++) {
 
@@ -104,5 +111,5 @@ public class Menu {
                     break;
             }
 
-        }
+        } 
     }
