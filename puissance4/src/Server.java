@@ -23,19 +23,25 @@ public class Server {
                 if (clients.size() == App.nbPlayers-1) {
                     System.out.println("Game Starting");
                     App.game.DisplayGrid();
-                    while(true) {
+                    while(!Menu.gameOver) {
+                        WinCond.CheckWin(App.game);
+                        if (Menu.gameOver){
+                            break;
+                        }
                         for (ClientHandler playingClient : clients) {
-                            DataOutputStream giveTurn = new DataOutputStream(clientSocket.getOutputStream());
-                            giveTurn.writeInt(turn);
+                            DataOutputStream dataToClient = new DataOutputStream(clientSocket.getOutputStream());
+                            dataToClient.writeInt(turn);
+                            dataToClient.flush();
                             if (turn == playingClient.ID) {
+                                System.out.println("Player 2 is playing...");
                                 DataInputStream clientColumn = new DataInputStream(client.socket.getInputStream());
                                 Menu.play(App.game, clientColumn.readInt());
-                                turn++;
-                                System.out.println(turn + "ouioui");
-                            } else {
-                                Menu.play(App.game, Menu.getColumn(grid));
                                 turn--;
-                                System.out.println(turn + "oui");
+                            } else {
+                                int column = Menu.getColumn(grid);
+                                Menu.play(App.game, column);
+                                dataToClient.writeInt(column);
+                                turn++;
                             }
                         }
                         if(Menu.gameOver) {
