@@ -1,29 +1,26 @@
 public class App {
-    static int nbPlayers = 2;
     static Grid game = new Grid();
-    static Player[] players = new Player[nbPlayers];
+    public static int nbPlayers = Menu.chooseNbPlayers();
+
     public static void main(String[] args) throws Exception {
-        InitialiseGrid();
-        SetPlayers();
-        Play();
-    }
-    public static void InitialiseGrid() {
-        nbPlayers = Menu.chooseNbPlayers();
-        System.out.println("nbPlayers = " + nbPlayers);        
         game.grid(nbPlayers);
         game.BuildGrid();
-    }
-    public static void SetPlayers() {
-        for (int ii = 0; ii < nbPlayers; ii++){
-                players[ii] = new Player();
-                players[ii].setSymbol(ii);
-        }
-    }
-    public static void Play() {
-        for (int ii = 0; ii < players.length; ii++) {
+        if (PlayersChoice.isLocal()) {
+            PlayersChoice.choosePiece(nbPlayers);
             game.DisplayGrid();
-            char column  = players[ii].getColumn(game.width);
-            game.PutPiece(players[ii].symbol, column-64);
+            while(!Menu.gameOver){
+                WinCond.CheckWin(game);
+                if (Menu.gameOver){
+                    break;
+                }
+                Menu.play(game, Menu.getColumn(game));
+            }
+        } else {
+            if (PlayersChoice.isHost()) {
+                Server.main(args);
+            }  else {
+                Client.main(args);
+            }
         }
     }
 }
