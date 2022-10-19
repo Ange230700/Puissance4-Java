@@ -1,9 +1,16 @@
 import java.lang.String;
+<<<<<<< HEAD
 public class Grid
 {
     public static int width;
     public static int height;
     public static String[][] grid;
+=======
+public class Grid{
+    public int width;
+    public int height;
+    public String[][] grid;
+>>>>>>> 3eead19822b5971d0ea6fe65c2b5c725f5b7b90e
     // for 2 players 8x6 grid, for 3 players 12x10 grid
 // <<<<<<< HEAD
     public Grid(int nbPlayers)
@@ -29,6 +36,7 @@ public class Grid
     }
 
      //build the grid
+<<<<<<< HEAD
      public static void BuildGrid()
      {
         for (int i=0; i<height+2;i++)
@@ -37,6 +45,12 @@ public class Grid
             {
                 if(  i == height || j==0 && i != height + 1 || j == width +1 && i != height + 1)
                 {
+=======
+     public void BuildGrid(){
+        for (int i=0; i<height+2;i++){
+            for (int j=0; j<width+2;j++){
+                if(  i == height || j==0 && i != height + 1|| j == width +1 && i != height + 1){
+>>>>>>> 3eead19822b5971d0ea6fe65c2b5c725f5b7b90e
                     grid[i][j] = "#";
                 }
                 else if (i == height + 1 && j!=0 && j!=width +1)
@@ -51,6 +65,7 @@ public class Grid
             }
         }
     }
+<<<<<<< HEAD
     public static void PutPiece(String piece, int column)
     {
         for(int i=height-1; i>=0; i--)
@@ -69,6 +84,20 @@ public class Grid
         {
             for(int j = 0; j < grid[i].length; j++)
             {
+=======
+    public void PutPiece(String piece, int column){
+        for(int i=height-1; i>=0; i--){
+                if(grid[i][column] == " "){
+                    grid[i][column] = piece;
+                    break;
+                }
+        }
+        DisplayGrid();
+    }
+    public void DisplayGrid (){
+        for(int i = 0; i < grid.length; i++){
+            for(int j = 0; j < grid[i].length; j++){
+>>>>>>> 3eead19822b5971d0ea6fe65c2b5c725f5b7b90e
                 System.out.print(grid[i][j]);
             }
             System.out.println();

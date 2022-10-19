@@ -3,11 +3,12 @@ import java.util.Scanner;
 public class Menu {
     public static boolean gameOver = false;
     public static boolean notADraw = false;
-    public static String piece1;
-    public static String piece2;
-    public static String piece3;
+    public static String piece1 = "X";
+    public static String piece2 = "O";
+    public static String piece3 = "V";
     public static int nbPlayers;
     public static int turnCounter = 0;
+
     public static int chooseNbPlayers(){
         Scanner sc = new Scanner(System.in);
         System.out.println("How many players will play?");
@@ -19,30 +20,49 @@ public class Menu {
         }
         return nbPlayers;
     }
-    public static void play(){
-        while(!gameOver){
-            GameManager.CheckWin();
-            if (gameOver){
-                break;
+
+    public static void play(Grid grid, int column){
+            if (nbPlayers == 2){
+                if (turnCounter % 2 == 0){
+                    grid.PutPiece(piece1, column);
+                    turnCounter++;
+                } else {
+                    grid.PutPiece(piece2, column);
+                    turnCounter--;
+                }
+            } else if (nbPlayers == 3){
+                if (turnCounter % 3 == 0){
+                    grid.PutPiece(piece1, column);
+                    turnCounter++;
+                } else if (turnCounter % 3 == 1){
+                    grid.PutPiece(piece2, column);
+                    turnCounter++;
+                } else {
+                    grid.PutPiece(piece3, column);
+                    turnCounter-=2;
+                }
             }
-            Scanner sc = new Scanner(System.in);
-            WhoPlays(nbPlayers, turnCounter);
+        }
+
+    public static int getColumn(Grid grid) {   
+        Scanner sc = new Scanner(System.in);
+            Menu.WhoPlays();
             System.out.println("Choose a column");
             String columnStr = sc.nextLine();
             while (columnStr == null || columnStr.isEmpty()){
-                WhoPlays(nbPlayers, turnCounter);
+                Menu.WhoPlays();
                 System.out.println("Please enter a column");
                 columnStr = sc.nextLine();
             }
-            int column = StringToInt(columnStr);
-            while(column < 1 || column > Grid.width){
+            int column = Menu.StringToInt(columnStr);
+            while(column < 1 || column > grid.width){
                 if (nbPlayers == 2){
-                    WhoPlays(nbPlayers, turnCounter);
+                    Menu.WhoPlays();
                     System.out.println("Please select a column between A and H");
                     columnStr = sc.nextLine();
                     column = StringToInt(columnStr);
                 } else if (nbPlayers == 3){
-                    WhoPlays(nbPlayers, turnCounter);
+                    Menu.WhoPlays();
                     System.out.println("Please select a column between A and L" );
                     columnStr = sc.nextLine();
                     column = StringToInt(columnStr);
@@ -50,28 +70,9 @@ public class Menu {
                 // columnStr = sc.nextLine();
                 // column = StringToInt(columnStr);
             }
-            if (nbPlayers == 2){
-                if (turnCounter % 2 == 0){
-                    Grid.PutPiece(piece1, column);
-                    turnCounter++;
-                } else {
-                    Grid.PutPiece(piece2, column);
-                    turnCounter++;
-                }
-            } else if (nbPlayers == 3){
-                if (turnCounter % 3 == 0){
-                    Grid.PutPiece(piece1, column);
-                    turnCounter++;
-                } else if (turnCounter % 3 == 1){
-                    Grid.PutPiece(piece2, column);
-                    turnCounter++;
-                } else {
-                    Grid.PutPiece(piece3, column);
-                    turnCounter++;
-                }
-            }
-        }
+            return column;
     }
+
     public static int StringToInt(String str) {
 
         String result = "";
@@ -91,25 +92,29 @@ public class Menu {
 
         return Integer.parseInt(result);
     }
-        public static void WhoPlays(int nbPlayers, int turnCounter){
-            switch (nbPlayers){
-                case 2:
-                    if (turnCounter % 2 == 0){
-                        System.out.println("Player 1 plays " + "("+ piece1 + ")");
-                    } else {
-                        System.out.println("Player 2 plays " + "("+ piece2 + ")");
-                    }
-                    break;
-                case 3:
-                    if (turnCounter % 3 == 0){
-                        System.out.println("Player 1 plays " + "("+ piece1 + ")");
-                    } else if (turnCounter % 3 == 1){
-                        System.out.println("Player 2 plays " + "("+ piece2 + ")");
-                    } else {
-                        System.out.println("Player 3 plays " + "("+ piece3 + ")");
-                    }
-                    break;
-            }
 
+<<<<<<< HEAD
         } 
+=======
+    public static void WhoPlays(){
+        switch (nbPlayers){
+            case 2:
+                if (turnCounter % 2 == 0){
+                    System.out.println("Player 1 plays " + "("+ piece1 + ")");
+                } else {
+                    System.out.println("Player 2 plays " + "("+ piece2 + ")");
+                }
+                break;
+            case 3:
+                if (turnCounter % 3 == 0){
+                    System.out.println("Player 1 plays " + "("+ piece1 + ")");
+                } else if (turnCounter % 3 == 1){
+                    System.out.println("Player 2 plays " + "("+ piece2 + ")");
+                } else {
+                    System.out.println("Player 3 plays " + "("+ piece3 + ")");
+                }
+                break;
+        }
+>>>>>>> 3eead19822b5971d0ea6fe65c2b5c725f5b7b90e
     }
+}

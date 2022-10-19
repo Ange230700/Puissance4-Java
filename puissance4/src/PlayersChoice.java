@@ -1,11 +1,11 @@
 import java.util.*;
-public class Players {  
+public class PlayersChoice {  
     public static String piece;
+    public static Scanner sc = new Scanner(System.in);
     public static void choosePiece(int nbPlayers){
-        Scanner sc = new Scanner(System.in);
         if (nbPlayers == 2) {
             System.out.println("Player 1, choose your piece (X or O)");
-            Menu.piece1 = sc.nextLine().toUpperCase();
+            Menu.piece1 = sc.next().toUpperCase();
             while (!Menu.piece1.equals("X") && !Menu.piece1.equals("O")) {
                 System.out.println("Please enter X or O");
                 Menu.piece1 = sc.nextLine().toUpperCase();
@@ -50,6 +50,26 @@ public class Players {
             System.out.println("Player 3 will play with " + Menu.piece3);
         }
     }
+    public static boolean isLocal() {
+        System.out.println("Do you want to play : \n 1. Online \n 2. Locally");
+        int choice = sc.nextInt();
+        while(choice != 1 && choice != 2){
+            System.out.println("Please enter 1 or 2");
+            choice = sc.nextInt();
+        } if (choice == 1) {
+            return false;
+        }
+        return true;
     }
-
-        
+    public static boolean isHost() {
+        System.out.println("Do you want to : \n 1. Host \n 2. Connect to server");
+        int choice = sc.nextInt();
+        while(choice != 1 && choice != 2){
+            System.out.println("Please enter 1 or 2");
+            choice = sc.nextInt();
+        } if (choice == 1) {
+            return true;
+        }
+        return false;
+    }
+}
