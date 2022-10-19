@@ -74,4 +74,12 @@ public class Grid
             System.out.println();
         }
     }
+
+    public static boolean CheckColumnFull(int column){
+        if(grid[0][column] != " "){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

@@ -23,11 +23,11 @@ public class GameManager {
                 if(Grid.grid[i][j] == Grid.grid[i][j+1] && Grid.grid[i][j] == Grid.grid[i][j+2] && Grid.grid[i][j] == Grid.grid[i][j+3] && Grid.grid[i][j] != " "){
                     System.out.println("Game Over");
                     if (Grid.grid[i][j] == Menu.piece1){
-                        System.out.println("Player 1 wins " + "(" + Menu.piece1 + ")" + "by aligning 4 pieces horizontally");
+                        System.out.println("Player 1 wins " + "(" + Menu.piece1 + ")" + " by aligning 4 pieces horizontally");
                     }else if (Grid.grid[i][j] == Menu.piece2){
-                        System.out.println("Player 2 wins " + "(" + Menu.piece2 + ")" + "by aligning 4 pieces horizontally");
+                        System.out.println("Player 2 wins " + "(" + Menu.piece2 + ")" + " by aligning 4 pieces horizontally");
                     }else if (Grid.grid[i][j] == Menu.piece3){
-                        System.out.println("Player 3 wins " + "(" + Menu.piece3 + ")" + "by aligning 4 pieces horizontally");
+                        System.out.println("Player 3 wins " + "(" + Menu.piece3 + ")" + " by aligning 4 pieces horizontally");
                     }
                     Menu.notADraw = true;
                     Menu.gameOver = true;
@@ -41,11 +41,11 @@ public class GameManager {
                 if(Grid.grid[i][j] == Grid.grid[i+1][j] && Grid.grid[i][j] == Grid.grid[i+2][j] && Grid.grid[i][j] == Grid.grid[i+3][j] && Grid.grid[i][j] != " "){
                     System.out.println("Game Over");
                     if (Grid.grid[i][j] == Menu.piece1){
-                        System.out.println("Player 1 wins " + "(" + Menu.piece1 + ")" + "by aligning 4 pieces vertically");
+                        System.out.println("Player 1 wins " + "(" + Menu.piece1 + ")" + " by aligning 4 pieces vertically");
                     }else if (Grid.grid[i][j] == Menu.piece2){
-                        System.out.println("Player 2 wins " + "(" + Menu.piece2 + ")" + "by aligning 4 pieces vertically");
+                        System.out.println("Player 2 wins " + "(" + Menu.piece2 + ")" + " by aligning 4 pieces vertically");
                     }else if (Grid.grid[i][j] == Menu.piece3){  
-                        System.out.println("Player 3 wins " + "(" + Menu.piece3 + ")" + "by aligning 4 pieces vertically");
+                        System.out.println("Player 3 wins " + "(" + Menu.piece3 + ")" + " by aligning 4 pieces vertically");
                     }
                     Menu.notADraw = true;
                     Menu.gameOver = true;
@@ -59,11 +59,11 @@ public class GameManager {
                 if(Grid.grid[i][j] == Grid.grid[i+1][j+1] && Grid.grid[i][j] == Grid.grid[i+2][j+2] && Grid.grid[i][j] == Grid.grid[i+3][j+3] && Grid.grid[i][j] != " "){
                     System.out.println("Game Over");
                     if (Grid.grid[i][j] == Menu.piece1){
-                        System.out.println("Player 1 wins " + "(" + Menu.piece1 + ")" + "by aligning 4 pieces diagonally");
+                        System.out.println("Player 1 wins " + "(" + Menu.piece1 + ")" + " by aligning 4 pieces diagonally");
                     }else if (Grid.grid[i][j] == Menu.piece2){
-                        System.out.println("Player 2 wins " + "(" + Menu.piece2 + ")" + "by aligning 4 pieces diagonally");
+                        System.out.println("Player 2 wins " + "(" + Menu.piece2 + ")" + " by aligning 4 pieces diagonally");
                     }else if (Grid.grid[i][j] == Menu.piece3){
-                        System.out.println("Player 3 wins " + "(" + Menu.piece3 + ")" + "by aligning 4 pieces diagonally");
+                        System.out.println("Player 3 wins " + "(" + Menu.piece3 + ")" + " by aligning 4 pieces diagonally");
                     }
                     Menu.notADraw = true;
                     Menu.gameOver = true;
@@ -77,11 +77,11 @@ public class GameManager {
                 if(Grid.grid[i][j] == Grid.grid[i+1][j-1] && Grid.grid[i][j] == Grid.grid[i+2][j-2] && Grid.grid[i][j] == Grid.grid[i+3][j-3] && Grid.grid[i][j] != " "){
                     System.out.println("Game Over");
                     if (Grid.grid[i][j] == Menu.piece1){
-                        System.out.println("Player 1 wins "+ "(" + Menu.piece1  + ")" + "by aligning 4 pieces diagonally");
+                        System.out.println("Player 1 wins "+ "(" + Menu.piece1  + ")" + " by aligning 4 pieces diagonally");
                     }else if (Grid.grid[i][j] == Menu.piece2){
-                        System.out.println("Player 2 wins" + "(" + Menu.piece2  + ")" + "by aligning 4 pieces diagonally");
+                        System.out.println("Player 2 wins" + "(" + Menu.piece2  + ")" + " by aligning 4 pieces diagonally");
                     }else if (Grid.grid[i][j] == Menu.piece3){
-                        System.out.println("Player 3 wins" + "(" + Menu.piece3  + ")" + "by aligning 4 pieces diagonally");
+                        System.out.println("Player 3 wins" + "(" + Menu.piece3  + ")" + " by aligning 4 pieces diagonally");
                     }
                     Menu.notADraw = true;
                     Menu.gameOver = true;
