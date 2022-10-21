@@ -4,8 +4,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
 public class Client {
-    static int ID = 4;
-    static Grid clientGrid = new Grid();
+    static int ID = 10;
     public static void main(String[] args) {
         ByteBuffer bytes = ByteBuffer.allocate(10);
         try {
@@ -13,11 +12,13 @@ public class Client {
             socket.connect(new InetSocketAddress("localhost", 4004));
             while (true) {
                 try {
+                    System.out.println("Waiting for player(s) to connect...");
                     ID = socket.read(bytes);
                     int nbPlayers = socket.read(bytes);
-                    clientGrid.grid(nbPlayers);
-                    clientGrid.BuildGrid();
-                    clientGrid.DisplayGrid();
+                    Menu.nbPlayers = nbPlayers;
+                    App.game.grid(nbPlayers);
+                    App.game.BuildGrid();
+                    App.game.DisplayGrid();
                     while(!Menu.gameOver) {
                         WinCond.CheckWin(App.game);
                         if (Menu.gameOver){
@@ -25,6 +26,8 @@ public class Client {
                         }
                         bytes.clear();
                         int turn = socket.read(bytes);
+                        Menu.turnCounter = turn-1;
+                        System.out.println(turn + " turn");
                         if ( turn == ID) {
                             try {
                                 System.out.println("Your turn : ");
@@ -37,15 +40,18 @@ public class Client {
                             } catch (Exception e) {
                                 System.err.println(e.toString());
                             }
-                        }
+                        } if ( turn == nbPlayers) {
                             System.out.println("Someone else is playing...");
                             int column = socket.read(bytes);
                             Menu.play(App.game, column);
                             turn--;
+                        }
                     }
                 } catch (IOException e) {
                     System.err.println(e.toString());
                     return;
+                } if (Menu.gameOver) {
+                    break;
                 }
             }
         } catch (IOException e ){

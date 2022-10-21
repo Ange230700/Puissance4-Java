@@ -19,14 +19,17 @@ public class Server {
         try {
             ServerSocketChannel ssChan = ServerSocketChannel.open();
             ssChan.bind(new InetSocketAddress(4004));
+            System.out.println("Waiting for player(s) to connect...");
             while(true) {
                 SocketChannel clientSocket = ssChan.accept();
                 ClientHandler client = new ClientHandler(clientSocket, ID);
                 clients.add(client);
                 ID++;
-                ID(clientSocket);
-                PlayersNb(clientSocket);
                 if (clients.size() == App.nbPlayers-1) {
+                    for (ClientHandler playingClient : clients) {
+                        ID(playingClient.socket, playingClient.ID);
+                        PlayersNb(playingClient.socket);
+                    }
                     System.out.println("Game Starting");
                     App.game.DisplayGrid();
                     while(!Menu.gameOver) {
@@ -36,10 +39,12 @@ public class Server {
                             break;
                         }
                         for (ClientHandler playingClient : clients) {
+                            System.out.println(turn + " turn server");
+                            System.out.println(playingClient.ID + " ID client");
                             if (turn == playingClient.ID) {
                                 System.out.println("Another player is playing...");
-                                YourTurn(clientSocket);
-                                int clientColumn = clientSocket.read(bytes);
+                                YourTurn(playingClient.socket);
+                                int clientColumn = playingClient.socket.read(bytes);
                                 Menu.play(App.game, clientColumn);
                                 turn++;
                                 WinCond.CheckWin(App.game);
@@ -56,7 +61,9 @@ public class Server {
                         }
                     }
                 }
-
+                if (Menu.gameOver) {
+                    break;
+                }
             }
          } catch(IOException e) {
             System.err.println(e.toString());
@@ -70,9 +77,9 @@ public class Server {
             System.err.println(e.toString());
         }
     }
-    public static void ID(SocketChannel sChannel) {
+    public static void ID(SocketChannel sChannel, int clientID) {
         try {
-            ByteBuffer bytes = ByteBuffer.wrap(new byte[(byte)ID-1]);
+            ByteBuffer bytes = ByteBuffer.wrap(new byte[(byte)clientID]);
             sChannel.write(bytes);
         } catch (IOException e){
             System.err.println(e.toString());
