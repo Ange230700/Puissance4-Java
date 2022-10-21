@@ -1,7 +1,7 @@
 import java.lang.String;
 public class Grid{
     public int width;
-    public int height;
+    public int height = 0;
     public String[][] grid;
     // for 2 players 8x6 grid, for 3 players 12x10 grid
     public void grid(int nbPlayers){

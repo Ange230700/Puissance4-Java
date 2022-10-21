@@ -1,48 +1,65 @@
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.Socket;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
 
 public class Client {
-
+    static int ID = 4;
+    static Grid clientGrid = new Grid();
     public static void main(String[] args) {
+        ByteBuffer bytes = ByteBuffer.allocate(10);
         try {
-            Socket socket = new Socket();
+            SocketChannel socket = SocketChannel.open();
             socket.connect(new InetSocketAddress("localhost", 4004));
-            // ClientHandler client = new ClientHandler(socket, null);
-            while(true) {
-                while(!Menu.gameOver) {
-                    WinCond.CheckWin(App.game);
-                    if (Menu.gameOver){
-                        break;
-                    }
-                    DataInputStream serverData = new DataInputStream(socket.getInputStream());
-                    int turn = serverData.readInt();
-                    App.game.DisplayGrid();
-                    if ( turn == 1) {
-                        try {
-                            DataOutputStream columnToServer = new DataOutputStream(socket.getOutputStream());
-                            System.out.println("Your turn : ");
-                            int column = Menu.getColumn(App.game);
-                            columnToServer.writeInt(column);
+            while (true) {
+                try {
+                    ID = socket.read(bytes);
+                    int nbPlayers = socket.read(bytes);
+                    clientGrid.grid(nbPlayers);
+                    clientGrid.BuildGrid();
+                    clientGrid.DisplayGrid();
+                    while(!Menu.gameOver) {
+                        WinCond.CheckWin(App.game);
+                        if (Menu.gameOver){
+                            break;
+                        }
+                        bytes.clear();
+                        int turn = socket.read(bytes);
+                        if ( turn == ID) {
+                            try {
+                                System.out.println("Your turn : ");
+                                Turn(socket);
+                                turn++;
+                                WinCond.CheckWin(App.game);
+                                if (Menu.gameOver){
+                                    break;
+                                }
+                            } catch (Exception e) {
+                                System.err.println(e.toString());
+                            }
+                        }
+                            System.out.println("Someone else is playing...");
+                            int column = socket.read(bytes);
                             Menu.play(App.game, column);
                             turn--;
-                        } catch (Exception e) {
-                            System.err.println(e.toString());
-                        }
-                    } else if (turn == 0 ) {
-                        System.out.println("Player 1 is playing...");
-                        int column = serverData.readInt();
-                        System.out.println(column);
-                        Menu.play(App.game, column);
                     }
+                } catch (IOException e) {
+                    System.err.println(e.toString());
+                    return;
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException e ){
             System.err.println(e.toString());
-            return;
         }
     }
-
+    public static void Turn(SocketChannel sChannel){
+        try {
+            int column = Menu.getColumn(App.game);
+            ByteBuffer bytes = ByteBuffer.wrap(new byte[(byte)column]);
+            sChannel.write(bytes);
+            Menu.play(App.game, column);
+        } catch (IOException e) {
+            System.err.println(e.toString());
+        }
+    }
 }

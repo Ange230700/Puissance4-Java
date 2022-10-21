@@ -13,7 +13,8 @@ public class App {
                 if (Menu.gameOver){
                     break;
                 }
-                Menu.play(game, Menu.getColumn(game));
+                int column = Menu.getColumn(App.game);
+                Menu.play(game, column);
             }
         } else {
             if (PlayersChoice.isHost()) {

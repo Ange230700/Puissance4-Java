@@ -1,28 +1,12 @@
-import java.io.DataOutputStream;
-import java.net.Socket;
+import java.nio.channels.SocketChannel;
 
 public class ClientHandler {
-    public Socket socket = null;
-    private Server server = null;
-    public int ID = 1;
+    public SocketChannel socket = null;
+    public int ID = 0;
 
-    public ClientHandler(Socket socket, Server server){
+    public ClientHandler(SocketChannel socket, int ID){
         this.socket = socket;
-        this.server = server;
+        this.ID = ID;
     }
 
-    public void Listen() {
-        if ( Server.turn == ID) {
-            try {
-                DataOutputStream columnToServer = new DataOutputStream(socket.getOutputStream());
-                server.grid.DisplayGrid();
-                System.out.println("Your turn : ");
-                int column = Menu.getColumn(server.grid);
-                columnToServer.writeInt(column);
-                server.turn++;
-            } catch (Exception e) {
-                System.err.println(e.toString());
-            }
-        }
-    }
 }
