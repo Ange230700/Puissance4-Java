@@ -1,3 +1,5 @@
+package puissance4;
+
 import java.util.*;
 public class PlayersChoice {  
     public static String piece;

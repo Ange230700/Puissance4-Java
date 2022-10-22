@@ -1,3 +1,5 @@
+package puissance4;
+
 public class WinCond {
     public static void Checkgrid(Grid grid){
         //check if the grid is full

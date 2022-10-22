@@ -1,3 +1,5 @@
+package puissance4;
+
 import java.net.InetAddress;
 
 public class App {

@@ -1,3 +1,5 @@
+package puissance4;
+
 import java.lang.String;
 public class Grid{
     public int width;
