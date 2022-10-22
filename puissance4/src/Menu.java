@@ -53,21 +53,21 @@ public class Menu {
             if (nbPlayers == 2){
                 if (turnCounter % 2 == 0){
                     Grid.PutPiece(piece1, column);
-                    turnCounter++;
+                    passTurn(column);
                 } else {
                     Grid.PutPiece(piece2, column);
-                    turnCounter++;
+                    passTurn(column);
                 }
             } else if (nbPlayers == 3){
                 if (turnCounter % 3 == 0){
                     Grid.PutPiece(piece1, column);
-                    turnCounter++;
+                    passTurn(column);
                 } else if (turnCounter % 3 == 1){
                     Grid.PutPiece(piece2, column);
-                    turnCounter++;
+                    passTurn(column);
                 } else {
                     Grid.PutPiece(piece3, column);
-                    turnCounter++;
+                    passTurn(column);
                 }
             }
         }
@@ -112,4 +112,11 @@ public class Menu {
             }
 
         } 
+        public static void passTurn(int column){
+            if (!Grid.CheckColumnFull(column)){
+                turnCounter++;
+            }else{
+                System.out.println("This column is full, please choose another one");
+            }
+        }
     }
