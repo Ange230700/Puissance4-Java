@@ -1,3 +1,5 @@
+import java.net.InetAddress;
+
 public class App {
     static Grid game = new Grid();
     public static int nbPlayers = 0;
@@ -20,6 +22,7 @@ public class App {
         } else {
             if (PlayersChoice.isHost()) {
                 nbPlayers = Menu.chooseNbPlayers();
+                System.out.println("Your ip address is " + InetAddress.getLocalHost());
                 game.grid(nbPlayers);
                 game.BuildGrid();
                 Server.main(args);

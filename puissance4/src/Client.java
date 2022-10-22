@@ -2,9 +2,12 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Client {
     public SocketChannel clientSocket;
+    private static Pattern IPpattern = Pattern.compile("^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
 
     public Client(SocketChannel socket) {
         clientSocket = socket;
@@ -13,7 +16,7 @@ public class Client {
         ByteBuffer bytes = ByteBuffer.allocate(30);
         try {
             SocketChannel socket = SocketChannel.open();
-            socket.connect(new InetSocketAddress("localhost", 4004));
+            socket.connect(new InetSocketAddress(getIPAddress(), 4004));
             while (true) {
                 try {
                     System.out.println("Waiting for player(s) to connect...");
@@ -56,5 +59,14 @@ public class Client {
         } catch (IOException e) {
             System.err.println(e.toString());
         }
+    }
+    public static String getIPAddress() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter an valid IP address");
+        String IP = sc.nextLine();
+        while (!IPpattern.matcher(IP).matches()) {
+            getIPAddress();
+        }
+        return IP;
     }
 }
