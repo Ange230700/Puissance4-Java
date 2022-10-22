@@ -15,7 +15,7 @@ public class Server {
         server.launch();
     }
     public void launch() {
-        ByteBuffer bytes = ByteBuffer.allocate(9);
+        ByteBuffer bytes = ByteBuffer.allocate(20);
         try {
             ServerSocketChannel ssChan = ServerSocketChannel.open();
             ssChan.bind(new InetSocketAddress(4004));
@@ -39,24 +39,32 @@ public class Server {
                             break;
                         }
                         for (ClientHandler playingClient : clients) {
-                            System.out.println(turn + " turn server");
-                            System.out.println(playingClient.ID + " ID client");
                             if (turn == playingClient.ID) {
-                                System.out.println("Another player is playing...");
                                 YourTurn(playingClient.socket);
+                                System.out.println("Another player is playing...");
                                 int clientColumn = playingClient.socket.read(bytes);
+                                bytes.clear();
                                 Menu.play(App.game, clientColumn);
-                                turn++;
                                 WinCond.CheckWin(App.game);
+                                turn++;
+                                System.out.println(turn +" turn après client");
                                 if (Menu.gameOver){
                                     break;
                                 }
-                            } if (turn == clients.size()+1) {
-                                break;
-                            }
+                            } 
+                            // else {
+                            //     YourTurn(playingClient.socket);
+                            //     Client.Turn(playingClient.socket, null, 1);
+                            // }
+                                // break;
+                            // }
                         }
                         if (turn == clients.size()+1 && !Menu.gameOver){
-                            Client.Turn(clientSocket);
+                            if (App.nbPlayers == 3) {
+                                Client.Turn(clients.get(0).socket, clients.get(1).socket, 0);
+                            } else {
+                                Client.Turn(clients.get(0).socket, null, 0);
+                            }
                             turn=1;
                         }
                     }
