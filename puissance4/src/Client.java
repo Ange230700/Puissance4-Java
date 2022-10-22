@@ -4,6 +4,11 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
 public class Client {
+    public SocketChannel clientSocket;
+
+    public Client(SocketChannel socket) {
+        clientSocket = socket;
+    }
     public static void main(String[] args) {
         ByteBuffer bytes = ByteBuffer.allocate(30);
         try {

@@ -6,10 +6,8 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 
 public class Server {
-    public static ArrayList<ClientHandler> clients = new ArrayList<ClientHandler>();
+    public static ArrayList<Client> clients = new ArrayList<Client>();
     public Grid grid = App.game;
-    public static int turn = 1;
-    public static int ID = 1;
     public static void main(String[] args) {
         Server server = new Server();
         server.launch();
@@ -22,12 +20,11 @@ public class Server {
             System.out.println("Waiting for player(s) to connect...");
             while(true) {
                 SocketChannel clientSocket = ssChan.accept();
-                ClientHandler client = new ClientHandler(clientSocket, ID);
+                Client client = new Client(clientSocket);
                 clients.add(client);
-                ID++;
                 if (clients.size() == App.nbPlayers-1) {
-                    for (ClientHandler _client : clients) {
-                        PlayersNb(_client.socket);
+                    for (Client _client : clients) {
+                        PlayersNb(_client.clientSocket);
                     }
                     System.out.println("Game Starting");
                     App.game.DisplayGrid();
@@ -37,14 +34,14 @@ public class Server {
                         if (Menu.gameOver){
                             break;
                         }
-                        for (ClientHandler playingClient : clients) {
-                            YourTurn(playingClient.socket);
-                            int clientColumn = playingClient.socket.read(bytes);
+                        for (Client playingClient : clients) {
+                            YourTurn(playingClient.clientSocket);
+                            int clientColumn = playingClient.clientSocket.read(bytes);
                             if (App.nbPlayers == 3){
                                 if (playingClient == clients.get(0)) {
-                                    Client.Turn(clients.get(1).socket, null, clientColumn);
+                                    Client.Turn(clients.get(1).clientSocket, null, clientColumn);
                                 } else {
-                                    Client.Turn(clients.get(0).socket, null, clientColumn);
+                                    Client.Turn(clients.get(0).clientSocket, null, clientColumn);
                                 }
                             }
                             Menu.play(App.game, clientColumn);
@@ -58,9 +55,9 @@ public class Server {
                         }
                         int column = Menu.getColumn(App.game);
                         if (App.nbPlayers == 3) {
-                            Client.Turn(clients.get(0).socket, clients.get(1).socket, column);
+                            Client.Turn(clients.get(0).clientSocket, clients.get(1).clientSocket, column);
                         } else {
-                            Client.Turn(clients.get(0).socket, null, column);
+                            Client.Turn(clients.get(0).clientSocket, null, column);
                         }
                         Menu.play(App.game, column);
                     }
