@@ -31,7 +31,7 @@ public class Client {
                         int message = socket.read(bytes);
                         if (message == 14) {
                             int column = Menu.getColumn(App.game);
-                            Turn(socket, null, column);
+                            Turn(socket, column);
                             Menu.play(App.game, column);
                         } else {
                             Menu.play(App.game, message);
@@ -49,14 +49,10 @@ public class Client {
             System.err.println(e.toString());
         }
     }
-    public static void Turn(SocketChannel sChannel, SocketChannel sChannel2, int column){
+    public static void Turn(SocketChannel sChannel, int column){
         try {
             ByteBuffer bytes = ByteBuffer.wrap(new byte[(byte)column]);
             sChannel.write(bytes);
-            if (sChannel2 != null) {
-                ByteBuffer bytes2 = ByteBuffer.wrap(new byte[(byte)column]);
-                sChannel2.write(bytes2);
-            }
         } catch (IOException e) {
             System.err.println(e.toString());
         }

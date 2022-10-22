@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class Server {
     public static ArrayList<Client> clients = new ArrayList<Client>();
-    public Grid grid = App.game;
     public static void main(String[] args) {
         Server server = new Server();
         server.launch();
@@ -39,9 +38,9 @@ public class Server {
                             int clientColumn = playingClient.clientSocket.read(bytes);
                             if (App.nbPlayers == 3){
                                 if (playingClient == clients.get(0)) {
-                                    Client.Turn(clients.get(1).clientSocket, null, clientColumn);
+                                    Client.Turn(clients.get(1).clientSocket, clientColumn);
                                 } else {
-                                    Client.Turn(clients.get(0).clientSocket, null, clientColumn);
+                                    Client.Turn(clients.get(0).clientSocket, clientColumn);
                                 }
                             }
                             Menu.play(App.game, clientColumn);
@@ -54,10 +53,8 @@ public class Server {
                             break;
                         }
                         int column = Menu.getColumn(App.game);
-                        if (App.nbPlayers == 3) {
-                            Client.Turn(clients.get(0).clientSocket, clients.get(1).clientSocket, column);
-                        } else {
-                            Client.Turn(clients.get(0).clientSocket, null, column);
+                        for (Client _client : clients) {
+                            Client.Turn(_client.clientSocket, column);
                         }
                         Menu.play(App.game, column);
                     }
