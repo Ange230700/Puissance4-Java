@@ -21,7 +21,7 @@ public class ClientHandler {
                 System.out.println("Your turn : ");
                 int column = Menu.getColumn(server.grid);
                 columnToServer.writeInt(column);
-                server.turn++;
+                Server.turn++;
             } catch (Exception e) {
                 System.err.println(e.toString());
             }

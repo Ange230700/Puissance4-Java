@@ -26,7 +26,7 @@ public class Server {
                     System.out.println("Game Starting");
                     App.game.DisplayGrid();
                     while(!Menu.gameOver) {
-                        WinCond.CheckWin(App.game);
+                        GameManager.CheckWin(App.game);
                         if (Menu.gameOver){
                             break;
                         }
@@ -51,6 +51,7 @@ public class Server {
                         }
                     }
                 }
+                // sS.close();
 
             }
          } catch(IOException e) {

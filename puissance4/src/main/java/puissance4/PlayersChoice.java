@@ -1,6 +1,6 @@
 package puissance4;
 
-import java.util.*;
+ import java.util.*;
 
 public class PlayersChoice 
 {  

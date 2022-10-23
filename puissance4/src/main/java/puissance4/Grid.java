@@ -2,25 +2,23 @@ package puissance4;
 import java.lang.String;
 public class Grid
 {
-    public static int width;
-    public static int height;
-    public static String[][] grid;
-    // for 2 players 8x6 grid, for 3 players 12x10 grid
-
+    public int width;
+    public int height;
     /**
-     * This is the grid constructor bound to the number of player.
-     * @param nbPlayers
+     * This property is a 2D strings'array. 
      */
-    public Grid(int nbPlayers)
+    public static String[][] grid;
+
+    public Grid()
     {
-        grid(nbPlayers);
+        width = 8;
+        height = 6;
+        grid = new String[height+2][width+2];
     }
 
     /**
-     * This method creates a 2-dimensional array of strings, characters in our case,
-     * whether it is 2 or 3 players.
-     * It is used in the constructor.
-     * @param nbPlayers
+     * This method allocates memory for the construction of the game grid.
+     * @param nbPlayers : for 2 players 8x6 grid, for 3 players 12x10 grid
      */
     public void grid(int nbPlayers)
     {
@@ -38,18 +36,21 @@ public class Grid
         }
     }
 
-     /**
-      * This method allows us to build the grid.
-      */
-     public void BuildGrid(){
-        for (int i=0; i<height+2;i++){
-            for (int j=0; j<width+2;j++){
-                if(  i == height || j==0 && i != height + 1|| j == width +1 && i != height + 1){
+    /**
+    * This method shapes the grid.
+    */
+    public void BuildGrid()
+    {
+        for (int i=0; i<height+2;i++)
+        {
+            for (int j=0; j<width+2;j++)
+            {
+                if(  i == height || j==0 && i != height + 1|| j == width +1 && i != height + 1)
+                {
                     grid[i][j] = "#";
                 }
                 else if (i == height + 1 && j!=0 && j!=width +1)
                 {
-                    //add alphabet letters to the bottom of the grid
                     grid[i][j] = String.valueOf((char)(j+64));
                 }
                 else
@@ -61,28 +62,28 @@ public class Grid
     }
 
     /**
-     * This method allows us to put a piece in a chosen column.
-     * @param piece can be X, O or V.
-     * @param column number to choose between 1 and 8 if it is 2 players, 
-     * or between 1 and 12 otherwise.
+     * This method puts a piece in a chosen column.
+     * @param piece is either X, O or V.
+     * @param column is an integer to choose in a certain range according to the number of players
+     * in the game. 
      */
-    public static void PutPiece(String piece, int column)
+    public void PutPiece(String piece, int column)
     {
         for(int i=height-1; i>=0; i--)
         {
-            if(grid[i][column] == " ")
-            {
-                grid[i][column] = piece;
-                break;
-            }
+                if(grid[i][column] == " ")
+                {
+                    grid[i][column] = piece;
+                    break;
+                }
         }
         DisplayGrid();
     }
 
     /**
-     * This method allows us to show the grid.
+     * This method displays the game state.
      */
-    public static void DisplayGrid ()
+    public void DisplayGrid ()
     {
         for(int i = 0; i < grid.length; i++)
         {
@@ -90,15 +91,14 @@ public class Grid
             {
                 System.out.print(grid[i][j]);
             }
-            System.out.println();
+            System.out.print("\n");
         }
     }
 
     /**
-     * This method checks if a column is full of pieces.
-     * @param column number to choose between 1 and 8 if it is 2 players, 
-     * or between 1 and 12 otherwise.
-     * @return a boolean.
+     * To check if a column is full.
+     * @param column represents the column index. 
+     * @return
      */
     public static boolean CheckColumnFull(int column)
     {
@@ -111,4 +111,4 @@ public class Grid
             return false;
         }
     }
-}
+}   
