@@ -1,11 +1,26 @@
 package puissance4;
 
 import java.lang.String;
+/**
+ * @author Yassine
+ */
 public class Grid{
+    /**
+     * the grid's width
+     */
     public int width;
+    /**
+     * the grid's height
+     */
     public int height = 0;
+    /**
+     * the grid's containing
+     */
     public String[][] grid;
-    // for 2 players 8x6 grid, for 3 players 12x10 grid
+    /**
+     * set the grid with the correct height and width regarding the number of players set
+     * @param nbPlayers the number of players
+     */
     public void grid(int nbPlayers){
         if(nbPlayers == 2){
             width = 8;
@@ -19,7 +34,9 @@ public class Grid{
         }
     }
 
-     //build the grid
+     /**
+      * Build the grid correctly with blank spaces
+      */
      public void BuildGrid(){
         for (int i=0; i<height+2;i++){
             for (int j=0; j<width+2;j++){
@@ -34,6 +51,11 @@ public class Grid{
             }
         }
     }
+    /**
+     * Replace a blank space by the symbol of the current player
+     * @param piece is the symbol of the current player
+     * @param column is where the player wants to put is piece
+     */
     public void PutPiece(String piece, int column){
         for(int i=height-1; i>=0; i--){
                 if(grid[i][column] == " "){
@@ -43,6 +65,9 @@ public class Grid{
         }
         DisplayGrid();
     }
+    /**
+     * Print the grid
+     */
     public void DisplayGrid (){
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[i].length; j++){
