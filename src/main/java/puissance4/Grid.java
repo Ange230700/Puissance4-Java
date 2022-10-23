@@ -71,7 +71,22 @@ public class Grid{
     public void DisplayGrid (){
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[i].length; j++){
-                System.out.print(grid[i][j]);
+                String color = "";
+                switch (grid[i][j]){
+                    case "X":
+                        color = "\u001B[96m";
+                        break;
+                    case "V":
+                        color = "\u001B[92m";
+                        break;
+                    case "O":
+                        color = "\u001B[93m";
+                        break;
+                    default :
+                        color = "\u001B[0m";
+                        break;
+                }
+                System.out.print(color + grid[i][j]);
             }
             System.out.println();
         }
